@@ -62,6 +62,8 @@ Both tested at Q4_K_M for a fair comparison on the same hardware.
 llama-bench -m <model.gguf> -ngl 99 -fa 1 -mmp 0 -p 2048 -n 32 -ub 2048
 ```
 
+![llama-bench速度比較](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/llama_bench_evox2.png)
+
 | Model | Size | pp2048 (tok/s) | tg32 (tok/s) |
 |---|---|---|---|
 | **Gemma 4 26B-A4B Q4_K_M** | 15.6 GiB | **1,348** | 65.4 |
@@ -69,9 +71,13 @@ llama-bench -m <model.gguf> -ngl 99 -fa 1 -mmp 0 -p 2048 -n 32 -ub 2048
 | Gemma 4 26B-A4B F16 | 47.0 GiB | 1,299 | 23.7 |
 | Qwen 3.5-35B-A3B Q6_K | 26.6 GiB | 624 | 61.5 |
 
+![GDNの影響](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/gdn_impact_pp.png)
+
 Gemma 4 has **1.8x faster prompt processing** than Qwen 3.5 — because it does not use GDN, the Vulkan backend runs at full efficiency. Qwen 3.5 has a slight edge in token generation (72.9 vs 65.4 t/s) due to smaller active parameters (3B vs 3.8B).
 
 #### EVO-X2 vs DGX Spark
+
+![EVO-X2 vs DGX Spark](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/tg_evox2_vs_dgx.png)
 
 | Model | Quant | DGX Spark tg32 | EVO-X2 tg32 |
 |---|---|---|---|
@@ -84,6 +90,8 @@ EVO-X2's Vulkan backend delivers faster token generation than DGX Spark's CUDA d
 
 [JCommonsenseQA v1.1](https://huggingface.co/datasets/leemeng/jcommonsenseqa-v1.1) — 1,119 five-choice questions, 3-shot prompting.
 
+![JCQ正解率](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/jcq_accuracy_evox2.png)
+
 | Model | Quant | Think | Accuracy | Latency/q | tok/s |
 |---|---|---|---|---|---|
 | **Gemma 4** | Q4_K_M | OFF | **96.16%** | 0.42s | 95.6 |
@@ -94,6 +102,8 @@ EVO-X2's Vulkan backend delivers faster token generation than DGX Spark's CUDA d
 #### Key Findings
 
 **Gemma 4's Thinking mode barely degrades accuracy (-0.18pt).** This is dramatically different from all other tested combinations:
+
+![Thinking効果](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/thinking_effect_evox2.png)
 
 | Model | Quant | Environment | nothink | think | Degradation |
 |---|---|---|---|---|---|
@@ -108,6 +118,8 @@ EVO-X2's Vulkan backend delivers faster token generation than DGX Spark's CUDA d
 ### VLM Multimodal Benchmark
 
 5 tech exhibition photos + 3 PPE (safety equipment) detection images.
+
+![VLMレイテンシ](https://raw.githubusercontent.com/nabe2030/gemma4-vs-qwen35-evo-x2/main/charts/vlm_latency_evox2.png)
 
 | Task | Gemma 4 Q4_K_M | Qwen 3.5 Q4_K_M |
 |---|---|---|
