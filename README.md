@@ -201,9 +201,8 @@ On AMD Strix Halo with Vulkan, **Gemma 4 has a clear advantage over Qwen 3.5** �
 | JCQ accuracy (think) | Gemma 4 (+12pt) | Near-zero Thinking degradation |
 | VLM speed | Gemma 4 (1.5x) | No GDN bottleneck in image prefill |
 | Model size | Gemma 4 (4 GiB smaller) | 15.6 vs 19.7 GiB |
-| License | Gemma 4 | Apache 2.0 vs restrictive |
 
-For Strix Halo users running llama.cpp with Vulkan, **Gemma 4 26B-A4B Q4_K_M is the recommended model** — it's faster, more accurate, smaller, and has a permissive license.
+For Strix Halo users running llama.cpp with Vulkan, **Gemma 4 26B-A4B Q4_K_M is the recommended model** — it's faster, more accurate, smaller.
 
 ## Scripts
 
